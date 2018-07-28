@@ -6,6 +6,11 @@ import com.brandonoium.jarl.core.ecs.ComponentStorage;
 import com.brandonoium.jarl.core.ecs.EcsException;
 import com.brandonoium.jarl.core.ecs.WorldPositionComponent;
 
+
+/**
+ * 
+ * @author Brandon
+ */
 public class AsciiOutputSubsystem
 {
 	private AsciiOutputProvider consoleOut;
