@@ -23,5 +23,10 @@ public interface ComponentStorage
 	<T extends Component> Set<Integer> getEntitiesWithComponent(Class<T> componentType);
 
 	<T extends Component> void addComponent(int entity, T component);
+	
+	<T extends Component> void removeComponent(int entity, Class<T> componentType)
+			throws EcsException;
+	
+	void removeAllComponentsFromEntity(int entity);
 
 }

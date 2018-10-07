@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.brandonoium.jarl.core.ecs.ComponentStorage;
 import com.brandonoium.jarl.core.ecs.EcsException;
+import com.brandonoium.jarl.core.ecs.Subsystem;
 import com.brandonoium.jarl.core.ecs.WorldPositionComponent;
 
 
@@ -11,13 +12,14 @@ import com.brandonoium.jarl.core.ecs.WorldPositionComponent;
  * 
  * @author Brandon
  */
-public class AsciiOutputSubsystem
+public class AsciiOutputSubsystem implements Subsystem
 {
 	private AsciiOutputProvider consoleOut;
 	private ComponentStorage storage;
 	
 	
-	private int windowXPosition, windowYPosition;
+	// TODO: Remove these.
+	private int windowXPosition = 0, windowYPosition = 0;
 	private int windowWidth, windowHeight;
 	
 	
@@ -29,6 +31,9 @@ public class AsciiOutputSubsystem
 	
 	public void update()
 	{
+		windowWidth = consoleOut.getConsoleWidth();
+		windowHeight = consoleOut.getConsoleHeight();
+		
 		Set<Integer> drawableEntities = storage.getEntitiesWithComponent(AsciiDrawableComponent.class);
 		
 		if(drawableEntities.isEmpty())

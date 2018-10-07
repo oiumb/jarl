@@ -94,4 +94,30 @@ public class HashMapComponentStorage implements ComponentStorage
 		
 		((HashMap<Integer, T>)store).put(entity, component);
 	}
+
+
+	@Override
+	public <T extends Component> void removeComponent(int entity, Class<T> componentType) throws EcsException
+	{
+		HashMap<Integer, ? extends Component> store = masterComponentStorage
+				.get(componentType);
+		
+		if(store == null)
+			throw new EcsException("No components of type " + componentType + " exist!");
+		
+		store.remove(entity);
+	}
+
+
+	@Override
+	public void removeAllComponentsFromEntity(int entity)
+	{
+		for(HashMap<Integer, ? extends Component> map : masterComponentStorage.values())
+		{
+			if(map.containsKey(entity))
+			{
+				map.remove(entity);
+			}
+		}
+	}
 }
