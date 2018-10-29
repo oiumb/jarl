@@ -10,5 +10,5 @@ package com.brandonoium.jarl.core.ecs;
  */
 public abstract class Component
 {
-	
+	public int parentEntity;
 }

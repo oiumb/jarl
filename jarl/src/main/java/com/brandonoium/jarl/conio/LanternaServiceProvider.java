@@ -41,11 +41,14 @@ public class LanternaServiceProvider implements AsciiOutputProvider
 		try
 		{
 			term = factory.createTerminal();
+			term.setCursorVisible(false);
 		} catch(IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		
 	}
 	

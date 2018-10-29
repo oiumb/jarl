@@ -8,4 +8,15 @@ public class EntityManager
 	{
 		nextEntity = 0;
 	}
+	
+	public EntityManager(int startIndex)
+	{
+		nextEntity = startIndex;
+	}
+	
+	
+	public int getNextEntityID()
+	{
+		return nextEntity++;
+	}
 }
