@@ -3,6 +3,7 @@ package com.brandonoium.jarl.conio;
 import java.util.Set;
 
 import com.brandonoium.jarl.core.ecs.ComponentStorage;
+import com.brandonoium.jarl.core.ecs.EcsEntity;
 import com.brandonoium.jarl.core.ecs.EcsException;
 import com.brandonoium.jarl.core.ecs.Subsystem;
 import com.brandonoium.jarl.core.ecs.WorldPositionComponent;
@@ -34,12 +35,12 @@ public class AsciiOutputSubsystem implements Subsystem
 		windowWidth = consoleOut.getConsoleWidth();
 		windowHeight = consoleOut.getConsoleHeight();
 		
-		Set<Integer> drawableEntities = storage.getEntitiesWithComponent(AsciiDrawableComponent.class);
+		Set<EcsEntity> drawableEntities = storage.getEntitiesWithComponent(AsciiDrawableComponent.class);
 		
 		if(drawableEntities.isEmpty())
 			return;
 		
-		for(int entity : drawableEntities)
+		for(EcsEntity entity : drawableEntities)
 		{
 			WorldPositionComponent entityPosition;
 			AsciiDrawableComponent entityDrawable;

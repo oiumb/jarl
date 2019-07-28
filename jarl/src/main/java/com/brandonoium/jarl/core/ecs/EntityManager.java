@@ -2,21 +2,21 @@ package com.brandonoium.jarl.core.ecs;
 
 public class EntityManager
 {
-	private int nextEntity;
+	private int nextEntityId;
 	
 	public EntityManager()
 	{
-		nextEntity = 0;
+		nextEntityId = 0;
 	}
 	
 	public EntityManager(int startIndex)
 	{
-		nextEntity = startIndex;
+		nextEntityId = startIndex;
 	}
 	
 	
-	public int getNextEntityID()
+	public EcsEntity getNextEntityID()
 	{
-		return nextEntity++;
+		return new EcsEntity(nextEntityId++);
 	}
 }

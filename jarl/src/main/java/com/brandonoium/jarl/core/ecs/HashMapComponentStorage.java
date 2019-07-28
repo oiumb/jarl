@@ -12,22 +12,22 @@ public class HashMapComponentStorage implements ComponentStorage
 	// All components are stored in here. For now.
 	// This storage container is something that should be continuously looked at and
 	// profiled as development continues.
-	HashMap<Class<?>, HashMap<Integer, ? extends Component>> masterComponentStorage;
+	HashMap<Class<?>, HashMap<EcsEntity, ? extends Component>> masterComponentStorage;
 	
 	
 	public HashMapComponentStorage()
 	{
-		masterComponentStorage = new HashMap<Class<?>, HashMap<Integer, ? extends Component>>();
+		masterComponentStorage = new HashMap<Class<?>, HashMap<EcsEntity, ? extends Component>>();
 	}
 	
 	
 	/* (non-Javadoc)
 	 * @see com.brandonoium.jarl.core.ecs.ComponentStorage#getComponent(int, java.lang.Class)
 	 */
-	public <T extends Component> T getComponent(int entity, Class<T> componentType)
+	public <T extends Component> T getComponent(EcsEntity entity, Class<T> componentType)
 						throws EcsException
 	{
-		HashMap<Integer, ? extends Component> store = masterComponentStorage
+		HashMap<EcsEntity, ? extends Component> store = masterComponentStorage
 				.get(componentType);
 		
 		if(store == null)
@@ -50,7 +50,7 @@ public class HashMapComponentStorage implements ComponentStorage
 	@SuppressWarnings("unchecked")
 	public <T extends Component> List<T> getComponentsOfType(Class<T> componentType)
 	{
-		HashMap<Integer, ? extends Component> store = masterComponentStorage
+		HashMap<EcsEntity, ? extends Component> store = masterComponentStorage
 				.get(componentType);
 		
 		if(store == null)
@@ -64,13 +64,13 @@ public class HashMapComponentStorage implements ComponentStorage
 	/* (non-Javadoc)
 	 * @see com.brandonoium.jarl.core.ecs.ComponentStorage#getEntitiesWithComponent(java.lang.Class)
 	 */
-	public <T extends Component> Set<Integer> getEntitiesWithComponent(Class<T> componentType)
+	public <T extends Component> Set<EcsEntity> getEntitiesWithComponent(Class<T> componentType)
 	{
-		HashMap<Integer, ? extends Component> store = masterComponentStorage
+		HashMap<EcsEntity, ? extends Component> store = masterComponentStorage
 				.get(componentType);
 		
 		if(store == null)
-			return new HashSet<Integer>();
+			return new HashSet<EcsEntity>();
 		else
 			return store.keySet();
 	}
@@ -81,25 +81,25 @@ public class HashMapComponentStorage implements ComponentStorage
 	 * @see com.brandonoium.jarl.core.ecs.ComponentStorage#addComponent(int, T)
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Component> void addComponent(int entity, T component)
+	public <T extends Component> void addComponent(EcsEntity entity, T component)
 	{
-		HashMap<Integer, ? extends Component> store = masterComponentStorage
+		HashMap<EcsEntity, ? extends Component> store = masterComponentStorage
 				.get(component.getClass());
 		
 		if(store == null)
 		{
-			store = new HashMap<Integer, T>();
+			store = new HashMap<EcsEntity, T>();
 			masterComponentStorage.put(component.getClass(), store);
 		}
 		
-		((HashMap<Integer, T>)store).put(entity, component);
+		((HashMap<EcsEntity, T>)store).put(entity, component);
 	}
 
 
 	@Override
-	public <T extends Component> void removeComponent(int entity, Class<T> componentType) throws EcsException
+	public <T extends Component> void removeComponent(EcsEntity entity, Class<T> componentType) throws EcsException
 	{
-		HashMap<Integer, ? extends Component> store = masterComponentStorage
+		HashMap<EcsEntity, ? extends Component> store = masterComponentStorage
 				.get(componentType);
 		
 		if(store == null)
@@ -110,9 +110,9 @@ public class HashMapComponentStorage implements ComponentStorage
 
 
 	@Override
-	public void removeAllComponentsFromEntity(int entity)
+	public void removeAllComponentsFromEntity(EcsEntity entity)
 	{
-		for(HashMap<Integer, ? extends Component> map : masterComponentStorage.values())
+		for(HashMap<EcsEntity, ? extends Component> map : masterComponentStorage.values())
 		{
 			if(map.containsKey(entity))
 			{

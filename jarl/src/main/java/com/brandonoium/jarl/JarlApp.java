@@ -6,12 +6,14 @@ import com.brandonoium.jarl.conio.AsciiOutputSubsystem;
 import com.brandonoium.jarl.conio.LanternaServiceProvider;
 import com.brandonoium.jarl.core.ecs.ComponentStorage;
 import com.brandonoium.jarl.core.ecs.ComponentStorageFactory;
+import com.brandonoium.jarl.core.ecs.EntityManager;
 import com.brandonoium.jarl.core.ecs.Subsystem;
 
 public class JarlApp
 {
 	public SubsystemManager systemsManager;
 	public ComponentStorage components;
+	public EntityManager entities;
 	
 	private LanternaServiceProvider lanterna;
 	
@@ -40,6 +42,8 @@ public class JarlApp
 		ComponentStorageFactory csFactory = new ComponentStorageFactory();
 		
 		components = csFactory.makeComponentStorage();
+		
+		entities = new EntityManager();
 	}
 	
 	private void initSubsystems()
